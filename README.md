@@ -19,7 +19,7 @@ sudo apt-get update
 sudo apt-get install -y apt-transport-https
 
 sudo apt-get update
-sudo apt-get install -y dotnet-sdk-5.0 aspnetcore-runtime-3.1
+sudo apt-get install -y dotnet-sdk-5.0
 ```
 
 Right-click the project folder and open in VSCode
@@ -37,7 +37,7 @@ Eventually Maple Media make the repo private so I stopped working on it because 
 
 
 Background
-- It's written in NetCore 3.1 (probably should switched to .Net5 now that it's out) uses EntityFrameworkCore since those are things I use in my day job
+- It's written in .Net5 and uses EntityFrameworkCore since those are things I use in my day job
 - Right now it just creats an SQLite database because it's quick to nuke and start fresh. I had the intention to switch to a more robust relational database once rapid development was done.
 - The initial idea was in the end to build a docker image and pass in some environment variables to get working
 
