@@ -39,12 +39,12 @@ namespace Pulse.Controllers
 					dbContext.Blacklists.Add(blacklist);
 					account.Blacklists.Add(blacklist);
 
-					await FirebaseHelper.SendMessage(account, "added_blacklist", new
-					{
-						id = blacklist.DeviceId,
-						phone_number = blacklist.PhoneNumber,
-						phrase = blacklist.Phrase
-					});
+					//await FirebaseHelper.SendMessage(account, "added_blacklist", new
+					//{
+					//	id = blacklist.DeviceId,
+					//	phone_number = blacklist.PhoneNumber,
+					//	phrase = blacklist.Phrase
+					//});
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -68,10 +68,10 @@ namespace Pulse.Controllers
 				if (blacklist == null)
 					return;
 
-				await FirebaseHelper.SendMessage(account, "removed_blacklist", new
-				{
-					id = device_id
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_blacklist", new
+				//{
+				//	id = device_id
+				//});
 
 				dbContext.Blacklists.Add(blacklist);
 				account.Blacklists.Add(blacklist);

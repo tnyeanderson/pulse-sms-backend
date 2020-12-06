@@ -54,20 +54,20 @@ namespace Pulse.Controllers
 					dbContext.Messages.Add(message);
 					account.Messages.Add(message);
 
-					await FirebaseHelper.SendMessage(account, "added_message", new
-					{
-						id = message.DeviceId,
-						conversationId = message.DeviceConversationId,
-						type = message.MessageType,
-						timestamp = message.Timestamp,
-						read= message.Read,
-						seen = message.Seen,
-						sent_device = message.SentDevice,
-						data = message.Data,
-						mime_type = message.MimeType,
-						from = message.MessageFrom,
-						color = message.Color
-					});
+					//await FirebaseHelper.SendMessage(account, "added_message", new
+					//{
+					//	id = message.DeviceId,
+					//	conversationId = message.DeviceConversationId,
+					//	type = message.MessageType,
+					//	timestamp = message.Timestamp,
+					//	read= message.Read,
+					//	seen = message.Seen,
+					//	sent_device = message.SentDevice,
+					//	data = message.Data,
+					//	mime_type = message.MimeType,
+					//	from = message.MessageFrom,
+					//	color = message.Color
+					//});
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -89,14 +89,14 @@ namespace Pulse.Controllers
 				message.Seen = request.Seen;
 				message.Timestamp = request.Timestamp;
 
-				await FirebaseHelper.SendMessage(account, "updated_message", new
-				{
-					id = message.DeviceId,
-					type = message.MessageType,
-					message.Read,
-					message.Seen,
-					timestamp = message.Timestamp
-				});
+				//await FirebaseHelper.SendMessage(account, "updated_message", new
+				//{
+				//	id = message.DeviceId,
+				//	type = message.MessageType,
+				//	message.Read,
+				//	message.Seen,
+				//	timestamp = message.Timestamp
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -114,11 +114,11 @@ namespace Pulse.Controllers
 
 				message.MessageType = message_type;
 
-				await FirebaseHelper.SendMessage(account, "update_message_type", new
-				{
-					id = device_id,
-					message_type
-				});
+				//await FirebaseHelper.SendMessage(account, "update_message_type", new
+				//{
+				//	id = device_id,
+				//	message_type
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -137,10 +137,10 @@ namespace Pulse.Controllers
 				dbContext.Messages.Remove(message);
 				account.Messages.Remove(message);
 
-				await FirebaseHelper.SendMessage(account, "removed_message", new
-				{
-					id = device_id
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_message", new
+				//{
+				//	id = device_id
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -167,10 +167,10 @@ namespace Pulse.Controllers
 					account.Messages.Remove(message);
 				}
 
-				await FirebaseHelper.SendMessage(account, "cleanup_messages", new
-				{
-					timestamp
-				});
+				//await FirebaseHelper.SendMessage(account, "cleanup_messages", new
+				//{
+				//	timestamp
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}

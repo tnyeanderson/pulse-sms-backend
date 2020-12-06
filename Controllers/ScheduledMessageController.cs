@@ -55,16 +55,16 @@ namespace Pulse.Controllers
 					dbContext.ScheduledMessages.Add(message);
 					account.ScheduledMessages.Add(message);
 
-					await FirebaseHelper.SendMessage(account, "added_scheduled_message", new
-					{
-						id = message.DeviceId,
-						to = message.To,
-						data = message.Data,
-						mimeType = message.MimeType,
-						timestamp = message.Timestamp,
-						title = message.Title,
-						repeat = message.Repeat
-					});
+					//await FirebaseHelper.SendMessage(account, "added_scheduled_message", new
+					//{
+					//	id = message.DeviceId,
+					//	to = message.To,
+					//	data = message.Data,
+					//	mimeType = message.MimeType,
+					//	timestamp = message.Timestamp,
+					//	title = message.Title,
+					//	repeat = message.Repeat
+					//});
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -88,16 +88,16 @@ namespace Pulse.Controllers
 				message.Title = request.Title;
 				message.Repeat = request.Repeat;
 
-				await FirebaseHelper.SendMessage(account, "updated_scheduled_message", new
-				{
-					id = message.DeviceId,
-					to = message.To,
-					data = message.Data,
-					mimeType = message.MimeType,
-					timestamp = message.Timestamp,
-					title = message.Title,
-					repeat = message.Repeat
-				});
+				//await FirebaseHelper.SendMessage(account, "updated_scheduled_message", new
+				//{
+				//	id = message.DeviceId,
+				//	to = message.To,
+				//	data = message.Data,
+				//	mimeType = message.MimeType,
+				//	timestamp = message.Timestamp,
+				//	title = message.Title,
+				//	repeat = message.Repeat
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -116,10 +116,10 @@ namespace Pulse.Controllers
 				dbContext.ScheduledMessages.Remove(message);
 				account.ScheduledMessages.Remove(message);
 
-				await FirebaseHelper.SendMessage(account, "removed_scheduled_message", new
-				{
-					id = message.DeviceId
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_scheduled_message", new
+				//{
+				//	id = message.DeviceId
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}

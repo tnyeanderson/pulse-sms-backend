@@ -55,13 +55,13 @@ namespace Pulse.Controllers
 					dbContext.Drafts.Add(draft);
 					account.Drafts.Add(draft);
 
-					await FirebaseHelper.SendMessage(account, "added_draft", new
-					{
-						id = draft.DeviceId,
-						conversation_id = draft.DeviceConversationId,
-						data = draft.Data,
-						mime_type = draft.MimeType
-					});
+					//await FirebaseHelper.SendMessage(account, "added_draft", new
+					//{
+					//	id = draft.DeviceId,
+					//	conversation_id = draft.DeviceConversationId,
+					//	data = draft.Data,
+					//	mime_type = draft.MimeType
+					//});
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -81,13 +81,13 @@ namespace Pulse.Controllers
 				draft.Data = request.Data;
 				draft.MimeType = request.MimeType;
 
-				await FirebaseHelper.SendMessage(account, "replaced_drafts", new
-				{
-					id = draft.DeviceId,
-					conversation_id = draft.DeviceConversationId,
-					data = draft.Data,
-					mime_type = draft.MimeType
-				});
+				//await FirebaseHelper.SendMessage(account, "replaced_drafts", new
+				//{
+				//	id = draft.DeviceId,
+				//	conversation_id = draft.DeviceConversationId,
+				//	data = draft.Data,
+				//	mime_type = draft.MimeType
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -106,10 +106,10 @@ namespace Pulse.Controllers
 				dbContext.Drafts.Remove(draft);
 				account.Drafts.Remove(draft);
 
-				await FirebaseHelper.SendMessage(account, "removed_drafts", new
-				{
-					id = draft.DeviceId
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_drafts", new
+				//{
+				//	id = draft.DeviceId
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}

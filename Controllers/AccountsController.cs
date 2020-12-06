@@ -70,10 +70,10 @@ namespace Pulse.Controllers
 				if (account == null)
 					return;
 
-				await FirebaseHelper.SendMessage(account, "removed_account", new
-				{
-					id = account_id
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_account", new
+				//{
+				//	id = account_id
+				//});
 
 				dbContext.Accounts.Remove(account);
 
@@ -200,12 +200,12 @@ namespace Pulse.Controllers
 							break;
 					}
 
-					await FirebaseHelper.SendMessage(account, "update_setting", new
-					{
-						pref, 
-						type, 
-						value
-					});
+					//await FirebaseHelper.SendMessage(account, "update_setting", new
+					//{
+					//	pref, 
+					//	type, 
+					//	value
+					//});
 
 					await dbContext.SaveChangesAsync();
 				}
@@ -225,11 +225,11 @@ namespace Pulse.Controllers
 				if (account == null)
 					return;
 
-				await FirebaseHelper.SendMessage(account, "dismissed_notification", new
-				{
-					device_id,
-					id
-				});
+				//await FirebaseHelper.SendMessage(account, "dismissed_notification", new
+				//{
+				//	device_id,
+				//	id
+				//});
 			}
 		}
 

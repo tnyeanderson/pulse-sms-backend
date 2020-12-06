@@ -56,7 +56,7 @@ namespace Pulse.Controllers
 					dbContext.Folders.Add(folder);
 					account.Folders.Add(folder);
 
-					await FirebaseHelper.SendMessage(account, "added_folder", folder);
+					//await FirebaseHelper.SendMessage(account, "added_folder", folder);
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -76,10 +76,10 @@ namespace Pulse.Controllers
 				dbContext.Folders.Remove(folder);
 				account.Folders.Remove(folder);
 
-				await FirebaseHelper.SendMessage(account, "removed_folder", new
-				{
-					id = device_id
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_folder", new
+				//{
+				//	id = device_id
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -97,7 +97,7 @@ namespace Pulse.Controllers
 
 				folder.Name = request.Name;
 
-				await FirebaseHelper.SendMessage(account, "updated_folder", folder);
+				//await FirebaseHelper.SendMessage(account, "updated_folder", folder);
 
 				await dbContext.SaveChangesAsync();
 			}

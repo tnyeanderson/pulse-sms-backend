@@ -55,16 +55,16 @@ namespace Pulse.Controllers
 					dbContext.Contacts.Add(contact);
 					account.Contacts.Add(contact);
 
-					await FirebaseHelper.SendMessage(account, "added_contact", new
-					{
-						phone_number = contact.PhoneNumber,
-						name = contact.Name,
-						type = contact.ContactType,
-						color = contact.Color,
-						color_dark = contact.ColorDark,
-						color_light = contact.ColorLight,
-						color_accent = contact.ColorAccent
-					});
+					//await FirebaseHelper.SendMessage(account, "added_contact", new
+					//{
+					//	phone_number = contact.PhoneNumber,
+					//	name = contact.Name,
+					//	type = contact.ContactType,
+					//	color = contact.Color,
+					//	color_dark = contact.ColorDark,
+					//	color_light = contact.ColorLight,
+					//	color_accent = contact.ColorAccent
+					//});
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -84,17 +84,17 @@ namespace Pulse.Controllers
 				contact.PhoneNumber = request.PhoneNumber;
 				contact.Name = request.Name;
 
-				await FirebaseHelper.SendMessage(account, "updated_contact", new
-				{
-					device_id = device_id,
-					phone_number = contact.PhoneNumber,
-					name = contact.Name,
-					type = contact.ContactType,
-					color = contact.Color,
-					color_dark = contact.ColorDark,
-					color_light = contact.ColorLight,
-					color_accent = contact.ColorAccent
-				});
+				//await FirebaseHelper.SendMessage(account, "updated_contact", new
+				//{
+				//	device_id = device_id,
+				//	phone_number = contact.PhoneNumber,
+				//	name = contact.Name,
+				//	type = contact.ContactType,
+				//	color = contact.Color,
+				//	color_dark = contact.ColorDark,
+				//	color_light = contact.ColorLight,
+				//	color_accent = contact.ColorAccent
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -113,11 +113,11 @@ namespace Pulse.Controllers
 				dbContext.Contacts.Remove(contact);
 				account.Contacts.Remove(contact);
 
-				await FirebaseHelper.SendMessage(account, "removed_contact", new
-				{
-					device_id = device_id,
-					phone_number = phone_number,
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_contact", new
+				//{
+				//	device_id = device_id,
+				//	phone_number = phone_number,
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}

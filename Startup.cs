@@ -26,7 +26,8 @@ namespace Pulse
 			services.AddResponseCompression();
 			services.AddControllers();
 
-			FirebaseHelper.Init(Environment.GetEnvironmentVariable("FIREBASE_SERVER_KEY"));
+			// Skip Firebase for now as it is not set up
+			// FirebaseHelper.Init(Environment.GetEnvironmentVariable("FIREBASE_SERVER_KEY"));
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

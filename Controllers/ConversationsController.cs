@@ -55,26 +55,26 @@ namespace Pulse.Controllers
 					dbContext.Conversations.Add(conversation);
 					account.Conversations.Add(conversation);
 
-					await FirebaseHelper.SendMessage(account, "added_conversation", new
-					{
-						id = conversation.DeviceId,
-						color = conversation.Color,
-						color_dark = conversation.ColorDark,
-						color_light = conversation.ColorLight,
-						color_accent = conversation.ColorAccent,
-						led_color = conversation.LedColor,
-						pinned = conversation.Pinned,
-						read = conversation.Read,
-						timestamp = conversation.Timestamp,
-						title = conversation.Title,
-						phone_numbers = conversation.PhoneNumbers,
-						snippet = conversation.Snippet,
-						ringtone = conversation.Ringtone,
-						id_matcher = conversation.IdMatcher,
-						mute = conversation.Mute,
-						archive = conversation.Archive,
-						folder_id = conversation.FolderId
-					});
+					//await FirebaseHelper.SendMessage(account, "added_conversation", new
+					//{
+					//	id = conversation.DeviceId,
+					//	color = conversation.Color,
+					//	color_dark = conversation.ColorDark,
+					//	color_light = conversation.ColorLight,
+					//	color_accent = conversation.ColorAccent,
+					//	led_color = conversation.LedColor,
+					//	pinned = conversation.Pinned,
+					//	read = conversation.Read,
+					//	timestamp = conversation.Timestamp,
+					//	title = conversation.Title,
+					//	phone_numbers = conversation.PhoneNumbers,
+					//	snippet = conversation.Snippet,
+					//	ringtone = conversation.Ringtone,
+					//	id_matcher = conversation.IdMatcher,
+					//	mute = conversation.Mute,
+					//	archive = conversation.Archive,
+					//	folder_id = conversation.FolderId
+					//});
 				}
 				await dbContext.SaveChangesAsync();
 			}
@@ -182,12 +182,12 @@ namespace Pulse.Controllers
 
 				conversation.Read = true;
 
-				await FirebaseHelper.SendMessage(account, "read_conversation", new
-				{
-					id = device_id,
-					android_device,
-					account_id
-				});
+				//await FirebaseHelper.SendMessage(account, "read_conversation", new
+				//{
+				//	id = device_id,
+				//	android_device,
+				//	account_id
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}

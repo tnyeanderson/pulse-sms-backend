@@ -55,13 +55,13 @@ namespace Pulse.Controllers
 					dbContext.AutoReplies.Add(autoReply);
 					account.AutoReplies.Add(autoReply);
 
-					await FirebaseHelper.SendMessage(account, "added_auto_reply", new
-					{
-						device_id = autoReply.DeviceId,
-						type = autoReply.ReplyType,
-						pattern = autoReply.Pattern,
-						response = autoReply.Response
-					});
+					//await FirebaseHelper.SendMessage(account, "added_auto_reply", new
+					//{
+					//	device_id = autoReply.DeviceId,
+					//	type = autoReply.ReplyType,
+					//	pattern = autoReply.Pattern,
+					//	response = autoReply.Response
+					//});
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -81,10 +81,10 @@ namespace Pulse.Controllers
 				dbContext.AutoReplies.Remove(autoReply);
 				account.AutoReplies.Remove(autoReply);
 
-				await FirebaseHelper.SendMessage(account, "removed_auto_reply", new
-				{
-					id = autoReply.DeviceId
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_auto_reply", new
+				//{
+				//	id = autoReply.DeviceId
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -104,13 +104,13 @@ namespace Pulse.Controllers
 				autoReply.Pattern = request.Pattern;
 				autoReply.Response = request.Response;
 
-				await FirebaseHelper.SendMessage(account, "added_auto_reply", new
-				{
-					device_id = autoReply.DeviceId,
-					type = autoReply.ReplyType,
-					pattern = autoReply.Pattern,
-					response = autoReply.Response
-				});
+				//await FirebaseHelper.SendMessage(account, "added_auto_reply", new
+				//{
+				//	device_id = autoReply.DeviceId,
+				//	type = autoReply.ReplyType,
+				//	pattern = autoReply.Pattern,
+				//	response = autoReply.Response
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}

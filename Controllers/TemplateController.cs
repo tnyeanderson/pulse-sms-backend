@@ -55,7 +55,7 @@ namespace Pulse.Controllers
 					dbContext.Templates.Add(template);
 					account.Templates.Add(template);
 
-					await FirebaseHelper.SendMessage(account, "added_template", template);
+					//await FirebaseHelper.SendMessage(account, "added_template", template);
 				}
 
 				await dbContext.SaveChangesAsync();
@@ -75,10 +75,10 @@ namespace Pulse.Controllers
 				dbContext.Templates.Remove(template);
 				account.Templates.Remove(template);
 
-				await FirebaseHelper.SendMessage(account, "removed_template", new
-				{
-					id = device_id
-				});
+				//await FirebaseHelper.SendMessage(account, "removed_template", new
+				//{
+				//	id = device_id
+				//});
 
 				await dbContext.SaveChangesAsync();
 			}
@@ -96,7 +96,7 @@ namespace Pulse.Controllers
 
 				template.Text = request.Text; 
 				
-				await FirebaseHelper.SendMessage(account, "updated_template", template);
+				//await FirebaseHelper.SendMessage(account, "updated_template", template);
 
 				await dbContext.SaveChangesAsync();
 			}
