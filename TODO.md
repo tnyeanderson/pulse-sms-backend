@@ -1,0 +1,81 @@
+# pulse-sms-backend
+TChilderhose implemented nearly all of this backend before giving me his code to use. Thank you!
+
+### API Endpoints
+Checked means "tested working", hash means not needed, and a tilde means the code is present but I haven't tested it yet.
+
+- [ ] ~ accounts/
+- [x] accounts/login
+- [ ] ~ accounts/signup
+- [ ] ~ accounts/remove_account
+- [ ] accounts/clean_account
+- [ ] ~ accounts/count
+- [ ] accounts/settings
+- [ ] ~ accounts/update_setting
+- [ ] ~ accounts/dismissed_notification
+- [ ] ~ accounts/view_subscription
+- [ ] # accounts/update_subscription
+- [ ] activate
+- [ ] ~ auto_replies/
+- [ ] ~ auto_replies/add
+- [ ] ~ auto_replies/remove/{device_id}
+- [ ] ~ auto_replies/update/{device_id}
+- [ ] # beta/register
+- [ ] # beta/remove
+- [ ] ~ blacklists/
+- [ ] ~ blacklists/add
+- [ ] ~ blacklists/remove/{device_id}
+- [ ] ~ contacts/
+- [ ] ~ contacts/add
+- [ ] ~ contacts/update_device_id
+- [ ] ~ contacts/remove_device_id
+- [ ] ~ contacts/clear
+- [ ] contacts/simple
+- [ ] contacts/remove_ids
+- [ ] ~ conversations/
+- [ ] ~ conversations/add
+- [ ] ~ conversations/update/{device_id}
+- [ ] ~ conversations/update_snippet/{device_id}
+- [ ] ~ conversations/update_title/{device_id}
+- [ ] ~ conversations/remove/{device_id}
+- [ ] ~ conversations/read/{device_id}
+- [ ] conversations/seen
+- [ ] conversations/seen/{device_id}
+- [ ] ~ conversations/archive/{device_id}
+- [ ] ~ conversations/unarchive/{device_id}
+- [ ] ~ conversations/add_to_folder/{device_id}
+- [ ] ~ conversations/remove_from_folder/{device_id}
+- [ ] conversations/clean
+- [ ] ~ converstaions/cleanup_messages
+- [ ] ~ devices/
+- [ ] ~ devices/add
+- [ ] ~ devices/update/{id}
+- [ ] ~ devices/remove/{id}
+- [ ] ~ devices/update_primary
+- [ ] ~ drafts/
+- [ ] ~ drafts/add
+- [ ] ~ drafts/update/{device_id}
+- [ ] ~ drafts/remove/{device_conversation_id}
+- [ ] drafts/replace
+- [ ] ~ folders/
+- [ ] ~ folders/add
+- [ ] ~ folders/remove/{device_id}
+- [ ] ~ folders/update/{device_id}
+- [ ] media/
+- [ ] ~ messages/
+- [ ] ~ messages/remove/{device_id}
+- [ ] ~ messages/add/
+- [ ] ~ messages/update/{device_id}
+- [ ] ~ messages/update_type/{device_id}
+- [ ] ~ messages/cleanup
+- [ ] messages/forward_to_phone
+- [ ] ~ purchases/record
+- [ ] ~ scheduled_messages/
+- [ ] ~ scheduled_messages/add
+- [ ] ~ scheduled_messages/update/{device_id}
+- [ ] ~ scheduled_messages/remove/{device_id}
+- [ ] stream (websockets)
+- [ ] ~ templates/
+- [ ] ~ templates/add
+- [ ] ~ templates/remove/{device_id}
+- [ ] ~ templates/update/{device_id}

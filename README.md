@@ -1,5 +1,36 @@
 # pulse-sms-backend
 
+This project provides a database and API backend for Pulse SMS.
+
+None of this would be possible without the work of Luke Klinker and TChilderhose.
+
+TChilderhose implemented *so* much of this backend before giving me his code to use. Thank you!
+
+---
+
+# Build and run
+
+Install the environment:
+```
+wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+
+sudo apt-get update
+sudo apt-get install -y apt-transport-https
+
+sudo apt-get update
+sudo apt-get install -y dotnet-sdk-5.0 aspnetcore-runtime-3.1
+```
+
+Right-click the project folder and open in VSCode
+
+Install any dependencies using the pop-up
+
+Run > Start Debugging
+
+
+## The following is from TChilderhose
+
 When Pulse SMS was bought by Maple Media (https://www.androidpolice.com/2020/10/29/it-looks-like-pulse-sms-has-been-bought-by-maple-media-get-ready-for-intrusive-ads/) I started working on a backend that I could selfhost and just fork the android client, manually swap the urls and keys and use that.
 
 Eventually Maple Media make the repo private so I stopped working on it because I don't have time to do upkeep on the android side of stuff. So I figured I would dump my findings and some initial code that I was working on.

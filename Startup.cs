@@ -34,6 +34,10 @@ namespace Pulse
 		{
 			if (env.IsDevelopment())
 			{
+				
+				app.UseCors(builder => builder.WithOrigins("*")
+                    					.AllowAnyMethod()
+										.AllowAnyHeader());
 				app.UseDeveloperExceptionPage();
 				app.Use(async (context, next) =>
 				{
