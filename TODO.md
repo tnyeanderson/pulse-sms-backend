@@ -79,3 +79,62 @@ Checked means "tested working", hash means not needed, and a tilde means the cod
 - [ ] ~ templates/add
 - [ ] ~ templates/remove/{device_id}
 - [ ] ~ templates/update/{device_id}
+
+
+## Firebase
+
+Long term, firebase should be discarded for a self-hostable open source alternative.
+
+Some firebase messages are implemented here but commented out to prevent errors. Here are the firebase actions from the Anderoid app:
+
+- [x] removed_account
+- [ ] updated_account
+- [ ] cleaned_account
+- [x] added_message
+- [x] update_message_type
+- [x] updated_message
+- [x] removed_message
+- [x] cleanup_messages
+- [ ] cleanup_conversation_messages
+- [x] added_contact
+- [x] updated_contact
+- [x] removed_contact
+- [ ] removed_contact_by_id
+- [x] added_conversation
+- [ ] update_conversation_snippet
+- [ ] update_conversation_title
+- [ ] updated_conversation
+- [ ] removed_conversation
+- [x] read_conversation
+- [ ] seen_conversation
+- [ ] archive_conversation
+- [ ] seen_conversations
+- [x] added_draft
+- [x] replaced_drafts
+- [x] removed_drafts
+- [x] added_blacklist
+- [x] removed_blacklist
+- [x] added_scheduled_message
+- [x] updated_scheduled_message
+- [x] removed_scheduled_message
+- [x] added_folder
+- [ ] add_conversation_to_folder
+- [ ] remove_conversation_from_folder
+- [x] updated_folder
+- [x] removed_folder
+- [x] added_template
+- [x] updated_template
+- [x] removed_template
+- [x] added_auto_reply
+- [ ] updated_auto_reply
+- [x] removed_auto_reply
+- [x] update_setting
+- [ ] dismissed_notification
+- [ ] update_subscription
+- [ ] update_primary_device
+- [ ] feature_flag
+- [ ] forward_to_phone
+
+## Database
+
+Switch to a real relational database instead of SQLite
