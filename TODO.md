@@ -4,6 +4,7 @@ TChilderhose implemented nearly all of this backend before giving me his code to
 ### Refactor
 
 - [ ] Settings table in database
+- [ ] Switch to a real relational database instead of SQLite
 
 ### API Endpoints
 Checked means "tested working", hash means not needed, and a tilde means the code is present but I haven't tested it yet.
@@ -43,13 +44,13 @@ Checked means "tested working", hash means not needed, and a tilde means the cod
 - [ ] ~ conversations/update_title/{device_id}
 - [ ] ~ conversations/remove/{device_id}
 - [ ] ~ conversations/read/{device_id}
-- [ ] conversations/seen
-- [ ] conversations/seen/{device_id}
+- [ ] ~ conversations/seen
+- [ ] ~ conversations/seen/{device_id}
 - [ ] ~ conversations/archive/{device_id}
 - [ ] ~ conversations/unarchive/{device_id}
 - [ ] ~ conversations/add_to_folder/{device_id}
 - [ ] ~ conversations/remove_from_folder/{device_id}
-- [ ] conversations/clean
+- [ ] # conversations/clean (included in Android app, but this endpoint is never called from any clients)
 - [ ] ~ converstaions/cleanup_messages
 - [ ] ~ devices/
 - [ ] ~ devices/add
@@ -60,7 +61,7 @@ Checked means "tested working", hash means not needed, and a tilde means the cod
 - [ ] ~ drafts/add
 - [ ] ~ drafts/update/{device_id}
 - [ ] ~ drafts/remove/{device_conversation_id}
-- [ ] drafts/replace
+- [ ] ~ drafts/replace/{device_conversation_id} (different clients use replace vs update)
 - [ ] ~ folders/
 - [ ] ~ folders/add
 - [ ] ~ folders/remove/{device_id}
@@ -88,6 +89,23 @@ Checked means "tested working", hash means not needed, and a tilde means the cod
 ## Firebase
 
 Long term, firebase should be discarded for a self-hostable open source alternative.
+
+The `/media/{id}` endpoint was used to query Firebase for the image stored by ID. Media is actually stored on Firebase.
+
+Upon sending, the client generates an ID and pushes the encrypted media file to firebase by ID. Once added, it sends a `messages/add` request to the server, storing the generated ID as the `DeviceId`, and Data set to `firebase -1` (encrypted).
+
+(For some reason, DeviceId seems to be the MessageId in the table? Investigate)
+
+From `DataSource.kt` (investigate):
+
+> The num at the end is used for making the initial upload (20 will be done the first time) and so if that num is < 20 on the downloading side it means that there won't actually be an image for it and we shouldn't try to download. After the initial upload, we should use "firebase -1" to indicate that the image will be available for download.
+
+
+We should:
+
+- [ ] Create a new table in the DB for "Media", joined to `Messages`, cascading, with FK=`DeviceId`
+- [ ] Have the `/media` endpoint lookup the Data column (blob) from the Media table by `DeviceId`
+- [ ] Change `downloadFileFromFirebase()` or equivalent functions in all clients to be queries to `/media`
 
 Some firebase messages are implemented here but commented out to prevent errors. Here are the firebase actions from the Anderoid app:
 
@@ -139,6 +157,3 @@ Some firebase messages are implemented here but commented out to prevent errors.
 - [ ] feature_flag
 - [ ] forward_to_phone
 
-## Database
-
-Switch to a real relational database instead of SQLite

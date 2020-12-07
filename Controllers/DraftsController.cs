@@ -37,6 +37,23 @@ namespace Pulse.Controllers
 			return (null, null);
 		}
 
+		private async Task<(Account, Draft)> GetDraftByConversationId(PulseDbContext dbContext, long device_conversation_id, string account_id)
+		{
+			var account = await dbContext.Accounts
+										.Include(a => a.Devices)
+										.Include(a => a.Drafts)
+										.Where(a => a.AccountId == account_id)
+										.FirstOrDefaultAsync();
+
+			if (account != null)
+			{
+				var draft = account.Drafts.Where(c => c.DeviceConversationId == device_conversation_id).FirstOrDefault();
+				if (draft != null)
+					return (account, draft);
+			}
+			return (null, null);
+		}
+
 		[HttpPost("add")]
 		public async void add([FromBody] AddDraftRequest request)
 		{
@@ -74,6 +91,31 @@ namespace Pulse.Controllers
 			using (var dbContext = new PulseDbContext())
 			{
 				var (account, draft) = await GetDraft(dbContext, device_id, account_id);
+
+				if (draft == null)
+					return;
+
+				draft.Data = request.Data;
+				draft.MimeType = request.MimeType;
+
+				//await FirebaseHelper.SendMessage(account, "replaced_drafts", new
+				//{
+				//	id = draft.DeviceId,
+				//	conversation_id = draft.DeviceConversationId,
+				//	data = draft.Data,
+				//	mime_type = draft.MimeType
+				//});
+
+				await dbContext.SaveChangesAsync();
+			}
+		}
+
+		[HttpPost("replace/{device_conversation_id}")]
+		public async void replace(long device_conversation_id, [FromQuery] string account_id, [FromBody] UpdateDraftRequest request)
+		{
+			using (var dbContext = new PulseDbContext())
+			{
+				var (account, draft) = await GetDraftByConversationId(dbContext, device_conversation_id, account_id);
 
 				if (draft == null)
 					return;

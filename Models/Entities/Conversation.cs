@@ -16,6 +16,9 @@ namespace Pulse.Models
 
 		[JsonPropertyName("folder_id")]
 		public long FolderId { get; set; }
+
+		[JsonPropertyName("seen")]
+		public bool Seen { get; set; }
 				
 		public ICollection<Draft> Drafts { get; set; }
 		public ICollection<Message> Messages { get; set; }

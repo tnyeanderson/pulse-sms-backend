@@ -9,7 +9,7 @@ namespace Pulse.Models
 		public string PhoneNumber { get; set; }
 
 		[JsonPropertyName("id")]
-		public string Id { get; set; }
+		public long Id { get; set; }
 
 		[JsonPropertyName("id_matcher")]
 		public string IdMatcher { get; set; }

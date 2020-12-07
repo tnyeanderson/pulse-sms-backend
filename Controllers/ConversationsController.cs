@@ -196,13 +196,44 @@ namespace Pulse.Controllers
 		[HttpPost("seen/{device_id}")]
 		public async void seen(long device_id, [FromQuery] string account_id)
 		{
-			throw new NotImplementedException();
+			using (var dbContext = new PulseDbContext())
+			{
+				var (account, conversation) = await GetConversation(dbContext, device_id, account_id);
+
+				if (conversation == null)
+					return;
+
+				conversation.Seen = true;
+
+				//await FirebaseHelper.SendMessage(account, "read_conversation", new
+				//{
+				//	id = device_id,
+				//	android_device,
+				//	account_id
+				//});
+
+				await dbContext.SaveChangesAsync();
+			}
 		}
 
 		[HttpPost("seen")]
 		public async void seen([FromQuery] string account_id)
 		{
-			throw new NotImplementedException();
+			using (var dbContext = new PulseDbContext())
+			{
+				var converstaions = await dbContext.Conversations
+										.Where(a => a.AccountId == account_id)
+										.FirstOrDefaultAsync();
+
+				if (converstaions == null)
+					return;
+
+				converstaions.Seen = true;
+
+				//await FirebaseHelper.SendMessage(account, "seen_conversations", new {});
+
+				await dbContext.SaveChangesAsync();
+			}
 		}
 
 		[HttpPost("archive/{device_id}")]
