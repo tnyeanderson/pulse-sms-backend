@@ -19,7 +19,7 @@ Checked means "tested working", hash means not needed, and a tilde means the cod
 - [ ] ~ accounts/dismissed_notification
 - [ ] ~ accounts/view_subscription
 - [ ] # accounts/update_subscription
-- [ ] activate
+- [ ] ~ activate
 - [ ] ~ auto_replies/
 - [ ] ~ auto_replies/add
 - [ ] ~ auto_replies/remove/{device_id}
@@ -34,8 +34,8 @@ Checked means "tested working", hash means not needed, and a tilde means the cod
 - [ ] ~ contacts/update_device_id
 - [ ] ~ contacts/remove_device_id
 - [ ] ~ contacts/clear
-- [ ] contacts/simple
-- [ ] contacts/remove_ids
+- [ ] ~ contacts/simple
+- [ ] ~ contacts/remove_ids
 - [ ] ~ conversations/
 - [ ] ~ conversations/add
 - [ ] ~ conversations/update/{device_id}
@@ -103,7 +103,7 @@ Some firebase messages are implemented here but commented out to prevent errors.
 - [x] added_contact
 - [x] updated_contact
 - [x] removed_contact
-- [ ] removed_contact_by_id
+- [x] removed_contact_by_id
 - [x] added_conversation
 - [ ] update_conversation_snippet
 - [ ] update_conversation_title

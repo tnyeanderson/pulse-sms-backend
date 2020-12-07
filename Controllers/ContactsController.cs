@@ -37,6 +37,22 @@ namespace Pulse.Controllers
 			return (null, null);
 		}
 
+		private async Task<(Account, Contact)> GetContactById(PulseDbContext dbContext, long contact_id, string account_id)
+		{
+			var account = await dbContext.Accounts
+										.Include(a => a.Contacts)
+										.Where(a => a.AccountId == account_id)
+										.FirstOrDefaultAsync();
+
+			if (account != null)
+			{
+				var contact = account.Contacts.Where(c => c.Id == contact_id).FirstOrDefault();
+				if (contact != null)
+					return (account, contact);
+			}
+			return (null, null);
+		}
+
 		[HttpPost("add")]
 		public async void add([FromBody] AddContactRequest request)
 		{
@@ -140,6 +156,62 @@ namespace Pulse.Controllers
 					account.Contacts.Remove(contact);
 				}
 				await dbContext.SaveChangesAsync();
+			}
+		}
+
+		[HttpPost("remove_ids/{contact_id}")]
+		public async void remove(long contact_id, [FromQuery] string account_id)
+		{
+			using (var dbContext = new PulseDbContext())
+			{
+				var (account, contact) = await GetContactById(dbContext, contact_id, account_id);
+
+				if (contact == null)
+					return;
+
+				dbContext.Contacts.Remove(contact);
+				account.Contacts.Remove(contact);
+
+				//await FirebaseHelper.SendMessage(account, "removed_contact_by_id", new
+				//{
+				//	id = contact_id,
+				//});
+
+				await dbContext.SaveChangesAsync();
+			}
+		}
+
+		[HttpGet("simple")]
+		public async Task<ContactsSimpleResponse[]> simple([FromQuery] string account_id, [FromQuery] int limit, [FromQuery] int offset)
+		{
+			using (var dbContext = new PulseDbContext())
+			{
+				// TODO: Change this to only select PhoneNumber, Name, Id, IdMatcher, Color, ColorAccent, ContactType
+				var account = await dbContext.Accounts
+										.Include(a => a.Contacts)
+										.Where(a => a.AccountId == account_id)
+										.FirstOrDefaultAsync();
+
+				if (account == null)
+					return new ContactsSimpleResponse[0];
+
+				var contacts = account.Contacts.Select(a => new ContactsSimpleResponse {
+					PhoneNumber = a.PhoneNumber,
+					Name = a.Name,
+					Id = a.Id,
+					IdMatcher = a.IdMatcher,
+					Color = a.Color,
+					ColorAccent = a.ColorAccent,
+					ContactType = a.ContactType
+				}).ToArray();
+
+				if (offset > 0)
+					contacts = contacts.Skip(offset).ToArray();
+
+				if (limit > 0)
+					contacts = contacts.Take(limit).ToArray();
+
+				return contacts;
 			}
 		}
 

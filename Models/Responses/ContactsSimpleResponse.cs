@@ -1,14 +1,15 @@
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace Pulse.Models
 {
-	public class Contact : ColorBase
+	public class ContactsSimpleResponse
 	{
 		[JsonPropertyName("phone_number")]
 		public string PhoneNumber { get; set; }
 
 		[JsonPropertyName("id")]
-		public long Id { get; set; }
+		public string Id { get; set; }
 
 		[JsonPropertyName("id_matcher")]
 		public string IdMatcher { get; set; }
@@ -19,7 +20,13 @@ namespace Pulse.Models
 		[JsonPropertyName("contact_type")]
 		public int ContactType { get; set; }
 
-		public Contact()
+		[JsonPropertyName("color")]
+		public int Color { get; set; }
+
+		[JsonPropertyName("color_accent")]
+		public int ColorAccent { get; set; }
+
+		public ContactsSimpleResponse()
 		{
 		}
 	}
