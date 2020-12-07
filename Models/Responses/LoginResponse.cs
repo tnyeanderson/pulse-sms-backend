@@ -43,6 +43,9 @@ namespace Pulse.Models
 		[JsonPropertyName("color_accent")]
 		public int ColorAccent { get; set; }
 
+		[JsonPropertyName("global_color_theme")]
+		public string GlobalColorTheme { get; set; }
+
 		public LoginResponse()
 		{
 		}
