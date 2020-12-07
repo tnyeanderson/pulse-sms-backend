@@ -84,7 +84,46 @@ namespace Pulse.Controllers
 		[HttpPost("clean_account")]
 		public async void clean([FromQuery] string account_id)
 		{
-			throw new NotImplementedException();
+			using (var dbContext = new PulseDbContext())
+			{
+				var account = await dbContext.Accounts
+										.Include(a => a.Devices)
+										.Where(a => a.AccountId == account_id)
+										.FirstOrDefaultAsync();
+
+				if (account == null)
+					return;
+
+				using (var transaction = dbContext.Database.BeginTransaction())
+				{
+					string[] tablesToClean = {
+						"Messages",
+						"Conversations",
+						"Contacts",
+						"Drafts",
+						"ScheduledMessages",
+						"Blacklists",
+						"Folders",
+						"AutoReplies",
+						"Templates"
+					};
+
+					try
+					{
+						foreach (string table in tablesToClean)
+						{
+							dbContext.Database.ExecuteSqlInterpolated($"DELETE FROM {table} WHERE AccountId = {account_id}");
+						}
+
+						//Without this line, no changes will get applied to the database
+						transaction.Commit();
+					}
+					catch
+					{
+					    transaction.Rollback();
+					}
+				}
+			}
 		}
 
 		[HttpGet("count")]
@@ -114,6 +153,23 @@ namespace Pulse.Controllers
 					ScheduledCount = account.ScheduledMessages.Count(),
 					BlacklistCount = account.Blacklists.Count()
 				};
+			}
+		}
+
+		[HttpGet("settings")]
+		public async Task<AccountSettingsResponse> settings([FromQuery] string account_id)
+		{
+			using (var dbContext = new PulseDbContext())
+			{
+				var account = await dbContext.Accounts
+										.Include(a => a.Devices)
+										.Where(a => a.AccountId == account_id)
+										.FirstOrDefaultAsync();
+
+				if (account == null)
+					return new AccountSettingsResponse();
+
+				return account.ForceType<AccountSettingsResponse>();
 			}
 		}
 
