@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pulse.Helpers;
+using Pulse.Hubs;
+using Pulse.Services;
 using System;
 using System.IO;
 using System.Text;
@@ -25,6 +27,8 @@ namespace Pulse
 		{
 			services.AddResponseCompression();
 			services.AddControllers();
+			services.AddSignalR();
+			services.AddSingleton<WebsocketService>();
 
 			// Skip Firebase for now as it is not set up
 			// FirebaseHelper.Init(Environment.GetEnvironmentVariable("FIREBASE_SERVER_KEY"));
@@ -54,6 +58,7 @@ namespace Pulse
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+				endpoints.MapHub<NotificationsHub>("/api/v1/stream");
 			});
 		}
 	}
