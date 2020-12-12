@@ -1,5 +1,9 @@
 # pulse-sms-backend
 
+THIS REPO IS ARCHIVED. PLEASE SEE THE NODEJS VERSION [HERE](https://github.com/tnyeanderson/heart-sms-backend)
+
+---
+
 This project provides a database and API backend for Pulse SMS.
 
 None of this would be possible without the work of Luke Klinker and TChilderhose.

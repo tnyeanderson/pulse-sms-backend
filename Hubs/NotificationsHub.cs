@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Pulse.Hubs
@@ -14,6 +15,7 @@ namespace Pulse.Hubs
 
         public async override Task OnConnectedAsync()
         {
+            Trace.WriteLine("Connected.........");
             await Clients.Caller.SendAsync("welcome");
         }
     }
